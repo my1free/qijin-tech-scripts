@@ -1,6 +1,14 @@
 #!/bin/bash
 
-source files.sh
+source shellkit/config.sh
+import files.sh
+import base.sh
 
-lsdir .
+#lsdir .
+array=("test" "a" "bbb")
+if  array_contains $array "a" ;then
+    echo "in"
+else
+    echo "not in"
+fi
 
