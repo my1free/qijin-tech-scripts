@@ -1,0 +1,228 @@
+" auto encoding detecting
+set encoding=utf8
+set fileencoding=utf8
+set fileencodings=gbk,utf8
+let g:fencview_autodetect = 1
+set paste
+
+" set term encoding according to system locale
+let &termencoding = substitute($LANG, "[a-zA-Z_-]*\.", "", "")
+
+"support xterm 256 colors
+set t_Co=256
+
+"Cscope.vim while list
+let g:cscope_while_list = '\.conf$\|\.c$\|\.cpp$\|\.cxx$\|\.h$\|\.py$\|\.vim$\|\.js$\|\.html$\|\.htm$\|\.java$'
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+set cin
+
+"auto locate the position last time
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm'\"")|else|exe "norm $"|endif|endif
+
+" differently from regular Vi. They are highly recommended though.
+set showcmd		" Show (partial) command in status line.
+set showmatch		" Show matching brackets.
+set smartcase		" Do smart case matching
+set incsearch		" Incremental search
+set autowrite		" Automatically save before commands like :next and :make
+set hidden          " Hide buffers when they are abandoned
+"set mouse=a
+
+set cul
+
+colorscheme molokai
+
+set nocompatible
+
+" Attempt to determine the type of a file based on its name and possibly its
+" contents.  Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+filetype indent plugin on
+
+" Enable syntax highlighting
+syntax on
+
+"tab = 4 space 
+set ts=4
+set expandtab
+set autoindent
+"------------------------------------------------------------
+" These are highly recommended options.
+
+" One of the most important options to activate. Allows you to switch from an
+" unsaved buffer without saving it first. Also allows you to keep an undo
+" history for multiple files. Vim will complain if you try to quit without
+" saving, and swap files will keep you safe if your computer crashes.
+set hidden
+
+" Better command-line completion
+set wildmenu
+
+" Show partial commands in the last line of the screen
+set showcmd
+
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
+set hlsearch
+
+" Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start
+
+" Display the cursor position on the last line of the screen or in the status
+" line of a window
+set ruler
+
+" Always display the status line, even if only one window is displayed
+set laststatus=2
+
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+
+" Use visual bell instead of beeping when doing something wrong
+set visualbell
+
+" And reset the terminal code for the visual bell.  If visualbell is set, and
+" this line is also included, vim will neither flash nor beep.  If visualbell
+" is unset, this does nothing.
+set t_vb=
+
+" Set the command window height to 2 lines, to avoid many cases of having to
+" "press <Enter> to continue"
+set cmdheight=2
+
+" Display line numbers on the left
+set number
+
+" Indentation options
+set shiftwidth=4
+
+"set the commandline window height
+set ch=2
+
+"auto read when file is modified
+set autoread
+
+"?趨<Leader>????Ӧ????
+let mapleader=";"
+
+
+filetype off
+filetype indent on
+set completeopt=longest,menu
+
+"system call man
+source $VIMRUNTIME/ftplugin/man.vim
+"??????ͣ???Զ?????
+autocmd CursorMoved * silent! exe printf('match Underlined /\<%s\>/', expand('<cword>'))
+
+" 设置包括vundle和初始化相关的runtime path
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" 另一种选择, 指定一个vundle安装插件的路径
+"call vundle#begin('~/some/path/here')
+
+" 让vundle管理插件版本,必须
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'scrooloose/nerdtree'
+"Plugin 'ctrlpvim/ctrlp.vime'
+Plugin 'tpope/vim-rails'
+
+" 你的所有插件需要在下面这行之前
+call vundle#end()            " 必须
+filetype plugin indent on    " 必须
+
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+filetype plugin indent on
+"=======================================all my plugin settings=============
+"=====================unite.vim=========================================================================
+"====https://github.com/Shougo/unite.vim==
+"=====================================================
+"Unite.vim The prefix key.
+"=====================================================
+nnoremap <silent> <Leader>U :Unite buffer file_mru file bookmark <CR>
+let g:unite_source_file_mru_limit = 10
+let g:unite_cursor_line_highlight = 'WarningMsg'
+"LET g:unite_abbr_highlight = 'TabLine'
+
+" For optimize.
+let g:unite_source_file_mru_filename_format = ''
+
+"==============================pathogen============================
+"execute pathogen#infect()
+"==============================taglist============================
+"????tablist????ֻ??ʾ??ǰ?༭?ļ???tag???ݣ????ǵ?ǰ???д????ļ???tag????
+let Tlist_Auto_Open = 1 "Ĭ???Զ?????
+let Tlist_Exit_OnlyWindow = 1   "????taglist??????һ?����ڣ????˳?vim
+let Tlist_Show_One_File=1
+"??????ʾ??ǩ?б??Ӵ??ڵĿ??ݼ????ټǣ?taglist
+nnoremap<silent><F2> :TlistToggle<CR>
+"???ñ?ǩ?Ӵ??ڵĿ???
+let Tlist_WinWidth=40
+"??ǩ?б���????ʾ?????ز?Ӱ??????gvim???ڴ?С
+let Tlist_Inc_Winwidth=0
+let Tlist_Use_Right_Window = 0
+let Tlist_GainFocus_On_ToggleOpen = 0  "????taglistʱ?????걣????taglist????
+let Tlist_Sort_Type = "name"    "????????????
+"ctags ??ת
+nmap <Leader>ts :tselect
+"auto generate tags
+"nnoremap <silent> <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+fq --language-force=C++ .<CR>
+nnoremap <silent> <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+fq .<CR>
+autocmd BufWritePost *.cpp :TlistUpdate
+"============================python.vim===============================
+au BufNewFile,BufRead *.py,*.pyw setf python
+"vim paste mode
+set pastetoggle=<F9>
+
+"======================NerdTree================
+" autocmd vimenter * NERDTree  "打开vim时自动打开NERDTree
+let NERDChristmasTree=0
+let NERDTreeWinSize=40
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+"autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " Close vim if the only window left open is a NERDTree
+nmap <F5> :NERDTreeToggle<cr>
+
+"=======================OmniCppComplete=========================
+set nocp
+filetype plugin on
+set completeopt=longest,menu
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_NamespaceSearch = 2
+let OmniCpp_DisplayMode = 1
+let OmniCpp_ShowScopeInAbbr = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
+"========================WinManager============================
+let g:winManagerWindowLayout='FileExplorer|TagList'
+"=======================<map>============================
+noremap<D-Left> <C-W><Left>
+noremap<D-Right> <C-W><Right>
+noremap<D-Up> <C-W><Up>
+noremap<D-Down> <C-W><Down>
+noremap<C-C> :q<CR>
+
+"==indentLine
+let g:loaded_indentLine = 1
+let g:indentLine_color_term = 240
+
+"==??ӳ??
+"??Alt + Up : ???ڸ߶?+5
+noremap<A-Up> :resize +5<CR>
+"??Alt + Down : ???ڸ߶?-5
+noremap<A-Down> :resize -5<CR>
+"??Alt + Right ?????ڿ???+5
+noremap<A-Right> :vertical resize +5<CR>
+"??Alt + Left : ???ڿ???-5
+noremap<A-Left> :vertical resize -5<CR>
