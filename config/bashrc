@@ -228,9 +228,9 @@ find_git_branch () {
             if [[ $head = ref:\ refs/heads/* ]]; then
                 git_branch="[${head#*/*/}]"
             elif [[ $head != '' ]]; then
-                git_branch=" ¡ú (detached)"
+                git_branch=" Â¡Ãº (detached)"
             else
-                git_branch=" ¡ú (unknow)"
+                git_branch=" Â¡Ãº (unknow)"
             fi
             return
         fi
@@ -256,7 +256,7 @@ export LESSCHARSET=utf-8
 # User specific aliases and functions
 
 test -s ~/bin/bladefunctions && . ~/bin/bladefunctions || true
-export PS1="\[\e[36;1m\]\u\[\e[0m\]\[\e[33;1m\]:\W \e[0m\]\[\e[31;1m\][$(date +%k:%M:%S)]$normal$yellow\$git_branch$normal\]\e[0m\]$"
+export PS1="\[\e[36;1m\]\u\[\e[0m\]\[\e[33;1m\]:\W \[\e[0m\]\[\e[31;1m\][\t]\[\e[0m\]$"
 
 if [ "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
