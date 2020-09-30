@@ -1,43 +1,26 @@
-## µİ¹éÕ¹Ê¾Ä³¸öÄ¿Â¼ÏÂËùÓĞÎÄ¼ş
-
-Usage:
+## è¯­æ³•å¢å¼º
+### åˆ¤æ–­æ•°ç»„ä¸­æ˜¯å¦åŒ…å«æŸä¸ªå…ƒç´ 
 ```bash
-sh list_files.sh [dir]
+A=("path" "get" "put")
+if [ $(contains "${A[@]}" "get") == "y" ]; then
+    echo "contains one"
+fi
 ```
-Example:
 
+## æ–‡ä»¶ && æ–‡ä»¶å¤¹
+#### é€’å½’å±•ç¤ºæŸä¸ªç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶
+Example:
 ```bash
-sh list_files.sh ~/Downloads/incubator
+lsdir .
 ```
-Output
-```
-/Users/qijin/Downloads/incubator/mvnw
-/Users/qijin/Downloads/incubator/mvnw.cmd
-/Users/qijin/Downloads/incubator/pom.xml
-/Users/qijin/Downloads/incubator/src/main/java/tech/qijin/incubator/IncubatorApplication.java
-```
-
-## ¶Ô±È¶à¸öÎÄ¼şµÄÒìÍ¬
-
-Requirements£º
-1. ¶Ô±ÈÎÄ¼şµÄÎÄ¼şÃûĞèÒªÏàÍ¬
-2. ¶Ô±ÈÎÄ¼şµÄÏà¶ÔÂ·¾¶(Ïà¶ÔÓÚ´«ÈëµÄ²ÎÊı)ĞèÒªÏàÍ¬
-
-×¢£º
-1. ÕâÀïµÄ¶Ô±ÈÊÇ±È½ÏÁ½¸öÎÄ¼şµÄmd5Öµ¡£md5ÖµÏàÍ¬£¬ÔòÈÏÎªÁ½¸öÎÄ¼şÏàÍ¬
-2. µÚÒ»¸ö²ÎÊı×÷Îª»ù×¼¡£Ò²¾ÍÊÇËµ£¬Èç¹ûÒ»¸öÎÄ¼şÖ»´æÔÚÓÚµÚ¶ş¸ö²ÎÊıÖĞ£¬ÄÇÃ´²»×ö¶Ô±È
-
-Usage:
-```
-sh diff_files.sh [path1] [path2]
-```
-
-Example:
-```
-sh diff_files.sh ~/dir1 ~/dir2
-```
-
 Output:
-1. ÎÄ¼şÄÚÈİÏàÍ¬µÄ£¬»áÓĞ"[SUCCESS]"×ÖÑù£¬´òÓ¡ÔÚ¿ØÖÆÌ¨
-2. ÎÄ¼şÄÚÈİ²»Í¬µÄ£¬»áÊ¹ÓÃvimdiff´ò¿ªÁ½¸öÎÄ¼ş¡£Ê¹ÓÃÕß¿É¸ù¾İĞèÒª£¬²Ù×÷Á½±ßµÄÎÄ¼ş
-
+```
+./README.md
+./all.sh
+./main.sh
+./shellkit/base.sh
+./shellkit/config.sh
+./shellkit/files.sh
+./shellkit/os.sh
+./shellkit/syntax.sh
+```
