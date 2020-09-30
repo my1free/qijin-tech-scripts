@@ -97,7 +97,7 @@ function import()
     fi
 }
 
-echo "$WARNING asdfad"
+#echo "$WARNING asdfad"
 #echo "$INFO asdf"
 #echo "$ERROR $BOLD adsf $NORMAL asdf"
 #echo "$(bold adfasdf)"
